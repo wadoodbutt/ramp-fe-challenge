@@ -2,8 +2,12 @@ import classNames from "classnames"
 import { useRef } from "react"
 import { InputCheckboxComponent } from "./types"
 
-export const InputCheckbox: InputCheckboxComponent = ({ id, checked = false, disabled, onChange }) => {
+export const InputCheckbox: InputCheckboxComponent = ({ id, checked, disabled, onChange }) => {
   const { current: inputId } = useRef(`RampInputCheckbox-${id}`)
+
+  const handleClickPress = () => {
+    onChange(!checked)
+  }
 
   return (
     <div className="RampInputCheckbox--container" data-testid={inputId}>
@@ -12,6 +16,7 @@ export const InputCheckbox: InputCheckboxComponent = ({ id, checked = false, dis
           "RampInputCheckbox--label-checked": checked,
           "RampInputCheckbox--label-disabled": disabled,
         })}
+        onClick={handleClickPress}
       />
       <input
         id={inputId}
@@ -19,7 +24,6 @@ export const InputCheckbox: InputCheckboxComponent = ({ id, checked = false, dis
         className="RampInputCheckbox--input"
         checked={checked}
         disabled={disabled}
-        onChange={() => onChange(!checked)}
       />
     </div>
   )
